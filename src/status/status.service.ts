@@ -1,9 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { StatusModel } from './model';
 import { Model } from 'mongoose';
 import { IStatus } from './interface';
-import { StatusDto } from './dto';
+import { StatusModel } from './model';
 
 @Injectable()
 export class StatusService {

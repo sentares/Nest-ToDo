@@ -1,8 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { StatusService } from './status.service';
 import { IStatus } from './interface';
-import { StatusDto } from './dto';
+import { StatusService } from './status.service';
 
 @ApiTags('Status')
 @Controller('status')
