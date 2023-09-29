@@ -7,9 +7,6 @@ export class UserModel implements IUser {
   id: string;
 
   @Prop()
-  name: string;
-
-  @Prop()
   email: string;
 
   @Prop()

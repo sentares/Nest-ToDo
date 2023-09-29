@@ -39,7 +39,7 @@ export class UserService {
   }
 
   async create(data: CreateUserDto): Promise<IUser> {
-    const { name, email, password, passwordRepeat } = data;
+    const { email, password, passwordRepeat } = data;
 
     const exist = await this.userModel.findOne({ email });
     if (exist) {
@@ -54,7 +54,7 @@ export class UserService {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new this.userModel({
-      name,
+      // name,
       email,
       password: hashedPassword,
     });
