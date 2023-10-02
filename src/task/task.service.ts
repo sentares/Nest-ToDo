@@ -50,7 +50,6 @@ export class TaskService {
 
   async create(
     data: CreateTaskDto,
-    // user: IUser,
     images?: Express.Multer.File[],
   ): Promise<ITask> {
     const { title, statusId, priorityId, projectId } = data;
@@ -61,13 +60,15 @@ export class TaskService {
       path.join(__dirname, '../../', 'images', image.filename),
     );
 
+    const publishedAt = Date.now();
+
     const newtask: ITask = new this.taskModel({
       title: title,
       status,
       priority,
       project,
-      // user,
       images: imagePaths,
+      publishedAt: publishedAt,
     });
 
     await newtask.save();

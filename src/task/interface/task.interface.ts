@@ -11,6 +11,7 @@ export interface ITask {
   project: IProject;
   users?: IUser[];
   images?: string[];
+  publishedAt: number;
 
   save?();
 }
