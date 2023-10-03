@@ -27,10 +27,14 @@ export class CommentController {
     return this.service.getCommentsByTaskId(taskId);
   }
 
-  @Post()
+  @Post('to/:taskId')
   @ApiSecurity('bearer')
   @UseGuards(AuthGuard)
-  async create(@Body() data: CreateCommentDto, @CurrentUser() user: IUser) {
-    return await this.service.create(data, user);
+  async create(
+    @Param('taskId') taskId: string,
+    @Body() data: CreateCommentDto,
+    @CurrentUser() user: IUser,
+  ) {
+    return await this.service.create(taskId, data, user);
   }
 }

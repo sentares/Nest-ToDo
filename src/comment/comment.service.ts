@@ -26,7 +26,7 @@ export class CommentService {
     if (!comment) {
       throw new NotFoundException('comment not found');
     }
-    return (await comment.populate('status')).populate('priority');
+    return await comment.populate('author');
   }
 
   async getCommentsByTaskId(taskId: string): Promise<IComment[]> {
@@ -36,8 +36,13 @@ export class CommentService {
     return comments;
   }
 
-  async create(data: CreateCommentDto, user: IUser): Promise<IComment> {
-    const { title, taskId, responseToComId } = data;
+  async create(
+    taskId: string,
+    data: CreateCommentDto,
+    user: IUser,
+  ): Promise<IComment> {
+    const { title, responseToComId } = data;
+
     const publishedAt = Date.now();
 
     const newComment: IComment = new this.commentModel({
