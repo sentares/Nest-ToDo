@@ -6,6 +6,7 @@ import { IUser } from 'src/user/interface';
 export interface ITask {
   id: string;
   title: string;
+  description: string;
   status: IStatus;
   priority: IPriority;
   project: IProject;

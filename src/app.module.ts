@@ -1,30 +1,32 @@
-import { Module } from '@nestjs/common'
-import { ConfigModule, ConfigService } from '@nestjs/config'
-import { MongooseModule } from '@nestjs/mongoose'
-import { AuthModule } from './auth/auth.module'
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
 
-import { PriorityModule } from './priority/priority.module'
-import { ProjectModule } from './project/project.module'
-import { StatusModule } from './status/status.module'
-import { TaskModule } from './task/task.module'
-import { UserModule } from './user/user.module'
+import { PriorityModule } from './priority/priority.module';
+import { ProjectModule } from './project/project.module';
+import { StatusModule } from './status/status.module';
+import { TaskModule } from './task/task.module';
+import { UserModule } from './user/user.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
-	imports: [
-		ConfigModule.forRoot({ isGlobal: true }),
-		MongooseModule.forRootAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: async (config: ConfigService) => ({
-				uri: config.get<string>('MONGODB_URI'),
-			}),
-		}),
-		UserModule,
-		AuthModule,
-		StatusModule,
-		PriorityModule,
-		TaskModule,
-		ProjectModule,
-	],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get<string>('MONGODB_URI'),
+      }),
+    }),
+    UserModule,
+    AuthModule,
+    StatusModule,
+    PriorityModule,
+    TaskModule,
+    ProjectModule,
+    CommentModule,
+  ],
 })
 export class AppModule {}

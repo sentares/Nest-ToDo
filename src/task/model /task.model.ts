@@ -14,6 +14,9 @@ export class TaskModel implements ITask {
   @Prop()
   title: string;
 
+  @Prop()
+  description: string;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'StatusModel' })
   status: StatusModel;
 

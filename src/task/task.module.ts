@@ -31,7 +31,7 @@ import { TaskService } from './task.service';
     }),
     forwardRef(() => AuthModule),
     forwardRef(() => StatusModule),
-    forwardRef(() => ProjectModule), // Добавьте ProjectModule в imports
+    forwardRef(() => ProjectModule),
     forwardRef(() => PriorityModule),
     forwardRef(() => UserModule),
   ],

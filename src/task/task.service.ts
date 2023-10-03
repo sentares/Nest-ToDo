@@ -52,7 +52,7 @@ export class TaskService {
     data: CreateTaskDto,
     images?: Express.Multer.File[],
   ): Promise<ITask> {
-    const { title, statusId, priorityId, projectId } = data;
+    const { title, description, statusId, priorityId, projectId } = data;
     const project = await this.projectService.getOne(projectId);
     const status = await this.statusService.getOne(statusId);
     const priority = await this.priorityService.getOne(priorityId);
@@ -63,13 +63,16 @@ export class TaskService {
     const publishedAt = Date.now();
 
     const newtask: ITask = new this.taskModel({
-      title: title,
+      title,
+      description,
       status,
       priority,
       project,
       // images: imagePaths,
       publishedAt: publishedAt,
     });
+
+    console.log(description, 'description');
 
     await newtask.save();
 
@@ -107,6 +110,10 @@ export class TaskService {
 
     if (data.title !== undefined && data.title.length > 0) {
       task.title = data.title;
+    }
+
+    if (data.description !== undefined && data.description.length > 0) {
+      task.description = data.description;
     }
 
     if (data.statusId !== undefined && data.statusId.length > 0) {

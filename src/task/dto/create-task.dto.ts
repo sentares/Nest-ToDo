@@ -6,6 +6,10 @@ export class CreateTaskDto {
   @Length(2, 200)
   title: string;
 
+  @ApiProperty({ example: 'Good House' })
+  @Length(2, 200)
+  description: string;
+
   @ApiProperty({ example: '6517079adaf95396814b245b' })
   @Length(24, 24)
   @Matches(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/, {
