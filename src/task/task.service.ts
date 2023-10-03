@@ -56,9 +56,9 @@ export class TaskService {
     const project = await this.projectService.getOne(projectId);
     const status = await this.statusService.getOne(statusId);
     const priority = await this.priorityService.getOne(priorityId);
-    const imagePaths = images.map((image) =>
-      path.join(__dirname, '../../', 'images', image.filename),
-    );
+    // const imagePaths = images.map((image) =>
+    //   path.join(__dirname, '../../', 'images', image.filename),
+    // );
 
     const publishedAt = Date.now();
 
@@ -67,7 +67,7 @@ export class TaskService {
       status,
       priority,
       project,
-      images: imagePaths,
+      // images: imagePaths,
       publishedAt: publishedAt,
     });
 

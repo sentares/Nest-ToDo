@@ -9,6 +9,7 @@ import { LoginDto } from './dto';
 import * as bcrypt from 'bcrypt';
 import { PayloadDto } from './dto/payload.dto';
 import { JwtService } from '@nestjs/jwt';
+import { IUser } from 'src/user/interface';
 
 @Injectable()
 export class AuthService {
@@ -17,11 +18,11 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
-
   async login(data: LoginDto) {
     const { email, password } = data;
-    const user = await this.userService.findByEmail(email);
+    const user: IUser = await this.userService.findByEmail(email);
     const isMatch = await bcrypt.compare(password, user?.password || '');
+
     if (!user || !isMatch) {
       throw new BadRequestException('Email or password does not match');
     }
@@ -33,7 +34,8 @@ export class AuthService {
     };
 
     const token = this.jwtService.sign(payload);
-    return { token };
+
+    return { profile: { email: user.email, id: user._id, token } };
   }
 
   async validate(token: string) {
